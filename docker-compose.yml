@@ -1,0 +1,9 @@
+version: '3'
+services:
+  python:
+    tty: true
+    image: python:3.10
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: sh entrypoint.sh
