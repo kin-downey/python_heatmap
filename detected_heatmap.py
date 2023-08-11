@@ -70,6 +70,7 @@ def generate_kde_heatmap(title: str, x_label: str, y_label: str, x: np.array, y:
     # ヒートマップを生成する
     fig = plt.figure()
     ax = fig.add_subplot(111)
+    ax.invert_yaxis()
     ax.contourf(xx,yy,f, cmap=cm.jet)
     ax.set_title(title)
     ax.set_xlabel(x_label)
@@ -83,6 +84,8 @@ if __name__ == '__main__':
     # 軸のラベルはアルファベットのみ指定可能
     x_label = 'X'
     y_label = 'Y'
-    x, y = generate_random_data()
+    # x, y = generate_random_data()
+    x = np.random.randint(0, 100, 10)
+    y = np.random.randint(0, 100, 10)
     # generate_heatmap(title, x_label, y_label, x, y)
     generate_kde_heatmap(title, x_label, y_label, x, y)
