@@ -19,6 +19,24 @@ def generate_random_data(data_length: int):
     return x, y
 
 
+def add_balancer(x: np.array, y: np.array):
+    """x, yの配列に-100から1500の値を追加
+        データのバランスをとるために使用（これがないとデータがまとまった際やデータが1つの際にエラーが生じる）
+
+    Args:
+        x (np.array): x座標の配列
+        y (np.array): y座標の配列
+    """
+    x = np.append(x, 1500)
+    y = np.append(y, 1000)
+    x = np.append(x, -100)
+    y = np.append(y, -100)
+    x = np.append(x, 1500)
+    y = np.append(y, -100)
+    x = np.append(x, -100)
+    y = np.append(y, 1000)
+    return x, y
+
 def validate_data_length(x: np.array, y: np.array):
     """データの個数を確認（xとyの長さが一致していることを確かめる）
 
@@ -89,8 +107,9 @@ if __name__ == '__main__':
     # 軸のラベルはアルファベットのみ指定可能
     x_label = 'X'
     y_label = 'Y'
-    # x, y = generate_random_data()
-    x = np.random.randint(0, 1280, 1000)
-    y = np.random.randint(0, 960, 1000)
+
+    x, y = generate_random_data(1000)
+    x, y = add_balancer(x, y)
+
     # generate_heatmap(title, x_label, y_label, x, y)
     generate_kde_heatmap(title, x_label, y_label, x, y, 'sample_image.png')
